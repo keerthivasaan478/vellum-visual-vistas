@@ -2,6 +2,7 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Benefits from '@/components/Benefits';
+import BeforeAfterSection from '@/components/BeforeAfterSection';
 import Process from '@/components/Process';
 import Testimonials from '@/components/Testimonials';
 import FinalCTA from '@/components/FinalCTA';
@@ -13,6 +14,7 @@ const Index = () => {
       <Header />
       <Hero />
       <Benefits />
+      <BeforeAfterSection />
       <Process />
       <Testimonials />
       <FinalCTA />
