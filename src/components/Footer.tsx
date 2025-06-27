@@ -32,12 +32,6 @@ const Footer = () => {
               <Link to="/gallery" className="block text-gray-300 hover:text-white transition-colors">
                 Gallery
               </Link>
-              <Link to="/pricing" className="block text-gray-300 hover:text-white transition-colors">
-                Pricing
-              </Link>
-              <Link to="/about-us" className="block text-gray-300 hover:text-white transition-colors">
-                About Us
-              </Link>
             </div>
           </div>
 

@@ -26,12 +26,6 @@ const Header = () => {
             <Link to="/gallery" className="font-inter text-off-black hover:text-burnt-gold transition-colors">
               Gallery
             </Link>
-            <Link to="/pricing" className="font-inter text-off-black hover:text-burnt-gold transition-colors">
-              Pricing
-            </Link>
-            <Link to="/about-us" className="font-inter text-off-black hover:text-burnt-gold transition-colors">
-              About
-            </Link>
             <Button className="btn-primary">
               Get Started
             </Button>
@@ -59,12 +53,6 @@ const Header = () => {
               </Link>
               <Link to="/gallery" className="font-inter text-off-black hover:text-burnt-gold transition-colors">
                 Gallery
-              </Link>
-              <Link to="/pricing" className="font-inter text-off-black hover:text-burnt-gold transition-colors">
-                Pricing
-              </Link>
-              <Link to="/about-us" className="font-inter text-off-black hover:text-burnt-gold transition-colors">
-                About
               </Link>
               <Button className="btn-primary w-full">
                 Get Started
