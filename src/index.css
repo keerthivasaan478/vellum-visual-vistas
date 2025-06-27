@@ -1,8 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Vellum Design System */
 
 @layer base {
   :root {
@@ -37,47 +38,32 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -98,6 +84,40 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-canvas-white text-off-black font-inter;
   }
+
+  /* Typography System */
+  h1 {
+    @apply font-playfair text-h1 text-off-black;
+  }
+
+  h2 {
+    @apply font-lora text-h2 text-off-black;
+  }
+
+  h3 {
+    @apply font-inter text-h3 text-off-black;
+  }
+
+  p {
+    @apply font-inter text-body text-off-black;
+  }
+
+  .caption {
+    @apply font-inter text-caption text-off-black;
+  }
+}
+
+/* Custom Component Styles */
+.btn-primary {
+  @apply bg-deep-teal text-white px-6 py-3 rounded-2xl font-inter font-medium hover:bg-deep-teal/90 transition-colors duration-200;
+}
+
+.btn-secondary {
+  @apply border-2 border-burnt-gold bg-transparent text-burnt-gold px-6 py-3 rounded-2xl font-inter font-medium hover:bg-burnt-gold hover:text-white transition-colors duration-200;
+}
+
+.card-soft {
+  @apply bg-white rounded-2xl shadow-soft p-6;
 }
