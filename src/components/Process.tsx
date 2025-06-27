@@ -8,8 +8,8 @@ const Process = () => {
     },
     {
       number: "02", 
-      title: "Artists Get to Work",
-      description: "Our team of professional interior designers handcraft each room with premium furniture and decor."
+      title: "System Processing",
+      description: "Our proven staging system transforms each room with premium furniture and decor using consistent quality standards."
     },
     {
       number: "03",

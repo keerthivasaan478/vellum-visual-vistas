@@ -15,10 +15,10 @@ const Footer = () => {
               <span className="font-playfair text-2xl font-bold">Vellum</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Handcrafted virtual staging by real artists. Transform empty listings into dream homes in just 4 hours.
+              Professional virtual staging with consistent quality systems. Transform empty listings into dream homes in just 4 hours.
             </p>
             <p className="text-burnt-gold font-medium">
-              We're not AI. We're artists.
+              Flawless results, every time.
             </p>
           </div>
 

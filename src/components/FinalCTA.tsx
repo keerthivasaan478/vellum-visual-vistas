@@ -9,8 +9,8 @@ const FinalCTA = () => {
           Ready to Transform Your Listings?
         </h2>
         <p className="font-inter text-lg text-teal-100 mb-8 max-w-2xl mx-auto">
-          Join thousands of agents who've discovered the power of handcrafted virtual staging. 
-          Get started today for just $50.
+          Join thousands of agents who've discovered the power of our consistent staging system. 
+          Get flawless, professional results today for just $50.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

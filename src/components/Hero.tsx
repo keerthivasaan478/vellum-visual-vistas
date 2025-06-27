@@ -11,7 +11,7 @@ const Hero = () => {
         </h1>
         
         <p className="font-inter text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          Transform empty listings into dream homes with our team of professional artists. 
+          Get flawless, professional listing photos in hours with our consistent system. 
           No AI, no algorithms—just beautiful, photorealistic staging that sells homes faster.
         </p>
         
@@ -35,7 +35,7 @@ const Hero = () => {
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 bg-success-green rounded-full"></div>
-            <span>Real artists, not AI</span>
+            <span>Consistent quality system</span>
           </div>
         </div>
       </div>

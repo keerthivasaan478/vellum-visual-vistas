@@ -5,21 +5,21 @@ const Testimonials = () => {
       name: "Sarah Mitchell",
       role: "Real Estate Agent",
       company: "Coldwell Banker",
-      quote: "Vellum transformed my listings completely. The quality is incredible and my clients are amazed. Sold 3 properties in the first week after staging!",
+      quote: "Vellum transformed my listings completely. The consistent quality is incredible and my clients are amazed. Sold 3 properties in the first week after staging!",
       rating: 5
     },
     {
       name: "Mike Rodriguez",
       role: "Property Investor",
       company: "Rodriguez Holdings",
-      quote: "I've tried other virtual staging services, but none compare to Vellum. The attention to detail and speed of delivery is unmatched.",
+      quote: "I've tried other virtual staging services, but none compare to Vellum. The systematic approach and speed of delivery is unmatched.",
       rating: 5
     },
     {
       name: "Jennifer Chen",
       role: "Realtor",
       company: "RE/MAX Premier",
-      quote: "The difference between AI-generated and human-crafted staging is night and day. Vellum's work looks absolutely realistic and beautiful.",
+      quote: "The difference between AI-generated and Vellum's professional system is night and day. The results look absolutely realistic and beautiful.",
       rating: 5
     }
   ];
