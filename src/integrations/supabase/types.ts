@@ -17,9 +17,10 @@ export type Database = {
           email: string
           id: string
           name: string
+          paypal_order_id: string | null
+          paypal_payer_id: string | null
           phone_number: string | null
           status: string
-          stripe_session_id: string | null
           updated_at: string
           zillow_link: string | null
         }
@@ -30,9 +31,10 @@ export type Database = {
           email: string
           id?: string
           name: string
+          paypal_order_id?: string | null
+          paypal_payer_id?: string | null
           phone_number?: string | null
           status?: string
-          stripe_session_id?: string | null
           updated_at?: string
           zillow_link?: string | null
         }
@@ -43,9 +45,10 @@ export type Database = {
           email?: string
           id?: string
           name?: string
+          paypal_order_id?: string | null
+          paypal_payer_id?: string | null
           phone_number?: string | null
           status?: string
-          stripe_session_id?: string | null
           updated_at?: string
           zillow_link?: string | null
         }
