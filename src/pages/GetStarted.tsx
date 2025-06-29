@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -8,9 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import PayPalCheckout from '@/components/PayPalCheckout';
+import { useNavigate } from 'react-router-dom';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -24,7 +23,7 @@ type FormData = z.infer<typeof formSchema>;
 const GetStarted = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPayPal, setShowPayPal] = useState(false);
-  const [orderData, setOrderData] = useState<FormData | null>(null);
+  const navigate = useNavigate();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -38,74 +37,29 @@ const GetStarted = () => {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    try {
-      // Store form data and show PayPal
-      setOrderData(data);
-      setShowPayPal(true);
-      toast.success('Please complete your payment to proceed');
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Here you could save the form data to a temporary state or table if needed
+    // before the user completes the payment. For now, we'll just show PayPal.
+    setShowPayPal(true);
+    setIsSubmitting(false);
+    toast.info('Please complete your payment to proceed.');
   };
 
-  const handlePaymentSuccess = async (paypalOrderId: string, paypalPayerId: string) => {
-    if (!orderData) return;
+  const handlePaymentSuccess = useCallback(() => {
+    toast.success('Payment successful! Redirecting...');
+    navigate('/payment-success');
+  }, [navigate]);
 
-    try {
-      // Create order in database
-      const { error } = await supabase
-        .from('orders')
-        .insert({
-          name: orderData.name,
-          email: orderData.email,
-          phone_number: orderData.phone || null,
-          zillow_link: orderData.zillowLink || null,
-          paypal_order_id: paypalOrderId,
-          paypal_payer_id: paypalPayerId,
-          status: 'completed',
-          amount: 7500, // $75.00
-          currency: 'usd',
-        });
+  const handlePaymentError = useCallback(() => {
+    toast.error('Payment failed. Please try again.');
+    setShowPayPal(false);
+  }, []);
+  
+  const handlePaymentCancel = useCallback(() => {
+    toast.info('Payment cancelled.');
+    setShowPayPal(false);
+  }, []);
 
-      if (error) {
-        console.error('Database error:', error);
-        toast.error('Payment successful but failed to save order. Please contact support.');
-        return;
-      }
-
-      // Send confirmation email
-      try {
-        const { error: emailError } = await supabase.functions.invoke('send-confirmation', {
-          body: {
-            email: orderData.email,
-            name: orderData.name,
-            orderId: paypalOrderId,
-          },
-        });
-
-        if (emailError) {
-          console.error('Email sending failed:', emailError);
-        }
-      } catch (emailError) {
-        console.error('Email error:', emailError);
-      }
-
-      toast.success('Payment successful! You\'ll receive a confirmation email shortly.');
-      
-      // Reset form
-      form.reset();
-      setShowPayPal(false);
-      setOrderData(null);
-    } catch (error) {
-      console.error('Error saving order:', error);
-      toast.error('Payment successful but failed to save order. Please contact support.');
-    }
-  };
-
-  if (showPayPal && orderData) {
+  if (showPayPal) {
     return (
       <div className="min-h-screen bg-canvas-white py-12">
         <div className="container mx-auto px-4 max-w-2xl">
@@ -113,27 +67,15 @@ const GetStarted = () => {
             <CardHeader>
               <CardTitle className="text-center">Complete Your Payment</CardTitle>
               <CardDescription className="text-center">
-                You're ordering Virtual Home Staging for $75.00
+                You're ordering Virtual Home Staging for $1.00
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-semibold mb-2">Order Summary:</h3>
-                <p><strong>Name:</strong> {orderData.name}</p>
-                <p><strong>Email:</strong> {orderData.email}</p>
-                {orderData.phone && <p><strong>Phone:</strong> {orderData.phone}</p>}
-                {orderData.zillowLink && <p><strong>Zillow Link:</strong> {orderData.zillowLink}</p>}
-                <p><strong>Service:</strong> Virtual Home Staging</p>
-                <p><strong>Amount:</strong> $75.00</p>
-              </div>
-              
               <PayPalCheckout
-                amount="75.00"
+                amount="1.00"
                 onSuccess={handlePaymentSuccess}
-                onError={() => {
-                  toast.error('Payment failed. Please try again.');
-                  setShowPayPal(false);
-                }}
+                onError={handlePaymentError}
+                onCancel={handlePaymentCancel}
               />
               
               <Button
@@ -156,7 +98,7 @@ const GetStarted = () => {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-off-black mb-4">Get Started</h1>
           <p className="text-lg text-gray-600">
-            Transform your property with professional virtual staging for just $75
+            Transform your property with professional virtual staging for just $1
           </p>
         </div>
 
@@ -241,7 +183,7 @@ const GetStarted = () => {
                 <div className="bg-burnt-gold/10 p-4 rounded-lg">
                   <h3 className="font-semibold text-burnt-gold mb-2">Service Details</h3>
                   <p className="text-sm text-gray-700 mb-2">
-                    <strong>Virtual Home Staging</strong> - $75.00
+                    <strong>Virtual Home Staging</strong> - $1.00
                   </p>
                   <p className="text-sm text-gray-600">
                     Professional virtual staging to help your property stand out and sell faster
@@ -253,7 +195,7 @@ const GetStarted = () => {
                   disabled={isSubmitting}
                   className="w-full bg-burnt-gold hover:bg-burnt-gold/90 text-white"
                 >
-                  {isSubmitting ? 'Processing...' : 'Proceed to Payment - $75.00'}
+                  {isSubmitting ? 'Processing...' : 'Proceed to Payment - $1.00'}
                 </Button>
               </form>
             </Form>

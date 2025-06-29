@@ -1,7 +1,10 @@
-
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
+  const isMobile = useIsMobile();
+
   return (
     <section className="py-16 md:py-24 bg-canvas-white">
       <div className="container mx-auto px-4 text-center">
@@ -16,8 +19,12 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button className="btn-primary text-lg px-8 py-4">
-            Get Started for $50
+          <Button 
+            size={isMobile ? "sm" : "lg"} 
+            className="bg-burnt-gold hover:bg-burnt-gold/90 text-white" 
+            asChild
+          >
+            <Link to="/get-started">Get Started for $1</Link>
           </Button>
           <Button variant="outline" className="btn-secondary text-lg px-8 py-4">
             View Gallery

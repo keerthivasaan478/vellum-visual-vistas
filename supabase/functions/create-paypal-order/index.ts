@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const corsHeaders = {
@@ -19,9 +18,11 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { amount, currency }: CreateOrderRequest = await req.json();
 
-    const PAYPAL_CLIENT_ID = Deno.env.get("PAYPAL_CLIENT_ID");
+    const PAYPAL_CLIENT_ID = "AcQuA4YJmax_N2i6rjANleE3RCiFP7Bpvva15vruniaulpK7tIuiYTYdyw96A43UeFlRWLYI1kxM2lAN"; //Deno.env.get("PAYPAL_CLIENT_ID");
     const PAYPAL_CLIENT_SECRET = Deno.env.get("PAYPAL_CLIENT_SECRET");
     const PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"; // Use https://api-m.paypal.com for production
+
+    console.log("Function is using PayPal Client ID:", PAYPAL_CLIENT_ID ? `${PAYPAL_CLIENT_ID.substring(0, 8)}...` : "Not Set");
 
     if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
       throw new Error("PayPal credentials not configured");

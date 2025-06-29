@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
@@ -13,16 +12,17 @@ interface PayPalCheckoutProps {
   amount: string;
   onSuccess: (orderId: string, payerId: string) => void;
   onError: () => void;
+  onCancel?: () => void;
 }
 
-const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onError }) => {
+const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onError, onCancel }) => {
   const paypalRef = useRef<HTMLDivElement>(null);
   const isRendered = useRef(false);
 
   useEffect(() => {
     const loadPayPalScript = () => {
       // Temporarily hardcoded for testing - replace with environment variable in production
-      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID || "AUip6dVHE24z05w_P6KkBxOKySl-ADxEL1qyoc-3D2SXdxUFSqZcTeDXx3sIayQYH7Fa_YiEil6aggAN";
+      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID || "AcQuA4YJmax_N2i6rjANleE3RCiFP7Bpvva15vruniaulpK7tIuiYTYdyw96A43UeFlRWLYI1kxM2lAN";
       
       if (!clientId) {
         console.error('PayPal Client ID is not configured');
@@ -117,7 +117,11 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
         },
         onCancel: () => {
           console.log('PayPal payment cancelled');
-          toast.info('Payment cancelled.');
+          if (onCancel) {
+            onCancel();
+          } else {
+            toast.info('Payment cancelled.');
+          }
         },
         style: {
           layout: 'vertical',
@@ -137,7 +141,7 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
       }
       isRendered.current = false;
     };
-  }, [amount, onSuccess, onError]);
+  }, [amount, onSuccess, onError, onCancel]);
 
   return <div ref={paypalRef} className="paypal-button-container"></div>;
 };
