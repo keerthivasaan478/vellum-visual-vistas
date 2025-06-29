@@ -21,7 +21,8 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
 
   useEffect(() => {
     const loadPayPalScript = () => {
-      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
+      // Temporarily hardcoded for testing - replace with environment variable in production
+      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID || "AUip6dVHE24z05w_P6KkBxOKySl-ADxEL1qyoc-3D2SXdxUFSqZcTeDXx3sIayQYH7Fa_YiEil6aggAN";
       
       if (!clientId) {
         console.error('PayPal Client ID is not configured');
