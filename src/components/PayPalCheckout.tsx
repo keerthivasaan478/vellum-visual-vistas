@@ -21,17 +21,34 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
 
   useEffect(() => {
     const loadPayPalScript = () => {
+      const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
+      
+      if (!clientId) {
+        console.error('PayPal Client ID is not configured');
+        toast.error('PayPal is not properly configured');
+        onError();
+        return;
+      }
+
+      console.log('Loading PayPal with Client ID:', clientId);
+
       if (window.paypal && !isRendered.current) {
         renderPayPalButton();
         return;
       }
 
       const script = document.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=USD`;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
       script.addEventListener('load', () => {
+        console.log('PayPal SDK loaded successfully');
         if (!isRendered.current) {
           renderPayPalButton();
         }
+      });
+      script.addEventListener('error', () => {
+        console.error('Failed to load PayPal SDK');
+        toast.error('Failed to load PayPal. Please try again.');
+        onError();
       });
       document.body.appendChild(script);
     };
@@ -39,11 +56,13 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
     const renderPayPalButton = () => {
       if (!window.paypal || !paypalRef.current || isRendered.current) return;
 
+      console.log('Rendering PayPal button');
       isRendered.current = true;
 
       window.paypal.Buttons({
         createOrder: async () => {
           try {
+            console.log('Creating PayPal order for amount:', amount);
             const { data, error } = await supabase.functions.invoke('create-paypal-order', {
               body: {
                 amount: amount,
@@ -56,6 +75,7 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
               throw new Error('Failed to create PayPal order');
             }
 
+            console.log('PayPal order created:', data.id);
             return data.id;
           } catch (error) {
             console.error('Error creating PayPal order:', error);
@@ -66,6 +86,7 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
         },
         onApprove: async (data: any) => {
           try {
+            console.log('Capturing PayPal payment for order:', data.orderID);
             const { data: captureData, error } = await supabase.functions.invoke('capture-paypal-order', {
               body: {
                 orderId: data.orderID,
@@ -77,6 +98,7 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
               throw new Error('Failed to capture PayPal payment');
             }
             
+            console.log('PayPal payment captured successfully:', captureData);
             // Extract payer ID from the capture response
             const payerId = captureData.payer?.payer_id || captureData.payer?.id || 'unknown';
             
@@ -93,6 +115,7 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
           onError();
         },
         onCancel: () => {
+          console.log('PayPal payment cancelled');
           toast.info('Payment cancelled.');
         },
         style: {
