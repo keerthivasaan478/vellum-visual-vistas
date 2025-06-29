@@ -78,20 +78,16 @@ const GetStarted = () => {
 
       // Send confirmation email
       try {
-        const response = await fetch('/api/send-confirmation', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        const { error: emailError } = await supabase.functions.invoke('send-confirmation', {
+          body: {
             email: orderData.email,
             name: orderData.name,
             orderId: paypalOrderId,
-          }),
+          },
         });
 
-        if (!response.ok) {
-          console.error('Email sending failed');
+        if (emailError) {
+          console.error('Email sending failed:', emailError);
         }
       } catch (emailError) {
         console.error('Email error:', emailError);

@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 declare global {
   interface Window {
@@ -43,22 +44,18 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
       window.paypal.Buttons({
         createOrder: async () => {
           try {
-            const response = await fetch('/api/create-paypal-order', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
+            const { data, error } = await supabase.functions.invoke('create-paypal-order', {
+              body: {
                 amount: amount,
                 currency: 'USD'
-              }),
+              },
             });
 
-            if (!response.ok) {
+            if (error) {
+              console.error('Error creating PayPal order:', error);
               throw new Error('Failed to create PayPal order');
             }
 
-            const data = await response.json();
             return data.id;
           } catch (error) {
             console.error('Error creating PayPal order:', error);
@@ -69,21 +66,16 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ amount, onSuccess, onEr
         },
         onApprove: async (data: any) => {
           try {
-            const response = await fetch('/api/capture-paypal-order', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
+            const { data: captureData, error } = await supabase.functions.invoke('capture-paypal-order', {
+              body: {
                 orderId: data.orderID,
-              }),
+              },
             });
 
-            if (!response.ok) {
+            if (error) {
+              console.error('Error capturing PayPal payment:', error);
               throw new Error('Failed to capture PayPal payment');
             }
-
-            const captureData = await response.json();
             
             // Extract payer ID from the capture response
             const payerId = captureData.payer?.payer_id || captureData.payer?.id || 'unknown';
