@@ -26,8 +26,8 @@ const Hero = () => {
           >
             <Link to="/get-started">Get Started for $1</Link>
           </Button>
-          <Button variant="outline" className="btn-secondary text-lg px-8 py-4">
-            View Gallery
+          <Button variant="outline" className="btn-secondary text-lg px-8 py-4" asChild>
+            <Link to="/gallery">View Gallery</Link>
           </Button>
         </div>
         
