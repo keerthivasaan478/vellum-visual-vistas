@@ -12,8 +12,8 @@ const galleryItems = [
     description: 'An empty space is transformed into an elegant and inviting living room with virtual staging.'
   },
   {
-    beforeImage: { src: '/gallery/dining room1.png', alt: 'Empty dining room before virtual staging' },
-    afterImage: { src: '/gallery/diningroom2.png', alt: 'Furnished dining room after virtual staging' },
+    beforeImage: { src: '/gallery/dining-room1.png', alt: 'Empty dining room before virtual staging' },
+    afterImage: { src: '/gallery/dining-room2.png', alt: 'Furnished dining room after virtual staging' },
     title: 'Chic Dining Area',
     description: 'A bare dining area is converted into a chic and modern space, perfect for family dinners.'
   },
@@ -25,7 +25,7 @@ const galleryItems = [
   },
   {
     beforeImage: { src: '/gallery/livingroom2A2.png', alt: 'Living room before virtual staging' },
-    afterImage: { src: '/gallery/living room3A.png', alt: 'Living room after virtual staging' },
+    afterImage: { src: '/gallery/living-room3A.png', alt: 'Living room after virtual staging' },
     title: 'Bright & Airy Living Room',
     description: 'We transformed this living room to be brighter and more inviting.'
   },
