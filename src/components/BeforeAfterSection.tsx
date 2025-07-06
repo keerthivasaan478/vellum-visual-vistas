@@ -1,4 +1,3 @@
-
 import BeforeAfterSlider from './BeforeAfterSlider';
 
 const BeforeAfterSection = () => {
@@ -17,12 +16,12 @@ const BeforeAfterSection = () => {
         <div className="max-w-4xl mx-auto">
           <BeforeAfterSlider
             beforeImage={{
-              src: "https://images.unsplash.com/photo-1560185007-c5ca9d2c015d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-              alt: "Empty living room and kitchen area before virtual staging"
+              src: "/gallery/livingroom4.png",
+              alt: "Empty living room before virtual staging"
             }}
             afterImage={{
-              src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-              alt: "Modern, stylishly furnished living room after virtual staging"
+              src: "/gallery/livingroomA.png",
+              alt: "Furnished living room after virtual staging"
             }}
           />
         </div>

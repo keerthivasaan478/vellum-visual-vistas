@@ -6,28 +6,28 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const galleryItems = [
   {
-    beforeImage: { src: '/gallery-example-1-before.jpg', alt: 'Dated living room with wood paneling and a hot tub' },
-    afterImage: { src: '/gallery-example-1-after.jpg', alt: 'Modern, bright living room with stylish furniture' },
-    title: 'Modern Living Room Transformation',
-    description: 'From a dated, wood-paneled room to a bright and modern living space with a new color palette and contemporary furniture.'
+    beforeImage: { src: '/imageshero/living room1.png', alt: 'Empty living room before virtual staging' },
+    afterImage: { src: '/imageshero/living room2.png', alt: 'Furnished living room after virtual staging' },
+    title: 'Elegant Living Room Staging',
+    description: 'An empty space is transformed into an elegant and inviting living room with virtual staging.'
   },
   {
-    beforeImage: { src: '/gallery-example-1-before.jpg', alt: 'Dated living room with wood paneling and a hot tub' },
-    afterImage: { src: '/gallery-example-1-after.jpg', alt: 'Modern, bright living room with stylish furniture' },
-    title: 'Cozy Bedroom Makeover',
-    description: 'This bedroom was transformed into a cozy retreat with a new layout, lighting, and textiles.'
+    beforeImage: { src: '/gallery/dining room1.png', alt: 'Empty dining room before virtual staging' },
+    afterImage: { src: '/gallery/diningroom2.png', alt: 'Furnished dining room after virtual staging' },
+    title: 'Chic Dining Area',
+    description: 'A bare dining area is converted into a chic and modern space, perfect for family dinners.'
   },
   {
-    beforeImage: { src: '/gallery-example-1-before.jpg', alt: 'Dated living room with wood paneling and a hot tub' },
-    afterImage: { src: '/gallery-example-1-after.jpg', alt: 'Modern, bright living room with stylish furniture' },
-    title: 'Open Concept Kitchen',
-    description: 'We opened up the space to create a modern, open-concept kitchen perfect for entertaining.'
+    beforeImage: { src: '/gallery/livingroom2A.png', alt: 'Empty living room before virtual staging' },
+    afterImage: { src: '/gallery/livingroom2.png', alt: 'Furnished living room after virtual staging' },
+    title: 'Contemporary Living Space',
+    description: 'A simple room is elevated to a contemporary living space with stylish furniture and decor.'
   },
-    {
-    beforeImage: { src: '/gallery-example-1-before.jpg', alt: 'Dated living room with wood paneling and a hot tub' },
-    afterImage: { src: '/gallery-example-1-after.jpg', alt: 'Modern, bright living room with stylish furniture' },
-    title: 'Luxury Bathroom Upgrade',
-    description: 'A complete overhaul of the master bathroom, featuring a new vanity, shower, and high-end fixtures.'
+  {
+    beforeImage: { src: '/gallery/livingroom2A2.png', alt: 'Living room before virtual staging' },
+    afterImage: { src: '/gallery/living room3A.png', alt: 'Living room after virtual staging' },
+    title: 'Bright & Airy Living Room',
+    description: 'We transformed this living room to be brighter and more inviting.'
   },
 ];
 
