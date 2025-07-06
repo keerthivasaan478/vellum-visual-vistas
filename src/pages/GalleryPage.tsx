@@ -6,8 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const galleryItems = [
   {
-    beforeImage: { src: '/imageshero/living room1.png', alt: 'Empty living room before virtual staging' },
-    afterImage: { src: '/imageshero/living room2.png', alt: 'Furnished living room after virtual staging' },
+    beforeImage: { src: '/imageshero/living-room1.png', alt: 'Empty living room before virtual staging' },
+    afterImage: { src: '/imageshero/living-room2.png', alt: 'Furnished living room after virtual staging' },
     title: 'Elegant Living Room Staging',
     description: 'An empty space is transformed into an elegant and inviting living room with virtual staging.'
   },
